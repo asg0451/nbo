@@ -9,6 +9,7 @@
 
 #include "planet.h"
 #include "space.h"
+#include "space_printer.h"
 #include "util.h"
 #include "vec2.h"
 
@@ -23,19 +24,21 @@ int main() {
   //                                  Planet{{0, 5}, {0, 0}, 10},
   //                              });
 
-  auto space = Space({200, 80}, std::vector<Planet>{
-                                    Planet{{50, 60}, {0, 0}, 20},
-                                    Planet{{60, 60}, {1, -1}, 10},
-                                    Planet{{40, 20}, {0, .7}, 10},
-                                });
+  auto space = Space{{200, 80},
+                     std::vector<Planet>{
+                         Planet{{50, 60}, {0, 0}, 20},
+                         Planet{{60, 60}, {1, -1}, 10},
+                         Planet{{40, 20}, {0, .7}, 10},
+                     }};
 
-  std::cout << space << std::endl;
+  auto pp = SpacePrinter{space};
+  std::cout << pp << std::endl;
 
   for (auto i = 0; i < nticks; i++) {
     space.tick();
     system("clear");
     // std::cout << space << std::endl;
-    std::cout << space.pretty_print() << std::endl;
+    std::cout << pp.pretty_print() << std::endl;
   }
   return 0;
 }

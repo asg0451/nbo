@@ -17,4 +17,7 @@ clean:
 build/nbo: src/*.cpp src/*.h
 	$(CC) $(CC_OPTS) src/*.cpp -o $@ -I./src
 
-src/%.h: src/*.h
+# build/%.o: src/%.cpp src/*.h
+# 	$(CC) $(CC_OPTS) src/$*.cpp -c -o $@ -I./src
+
+# -c, -o
