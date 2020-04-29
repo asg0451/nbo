@@ -72,17 +72,20 @@ public:
    */
 
   std::string pretty_print() const {
-    int width = 30, height = 30;
+    int width = 100, height = 44;
+    // int width = 10, height = 10;
     double scale_x = 1.0 * width / max.x, scale_y = 1.0 * height / max.y;
 
     auto slots = std::vector<std::string>{}; // r-c format
-    slots.assign(width * height + 1, " ");
+    slots.assign(width * height, " ");
 
     for (auto p : planets) {
       auto x = std::floor(p.loc.x * scale_x);
       auto y = std::floor(p.loc.y * scale_y);
-      auto idx = x * width + y;
-      if (idx < 0 || idx > slots.size()) {
+      auto idx = y * width + x;
+
+      if (idx < 0 || idx > slots.size() || x > width || y > height) {
+        // offscreen
         // std::cout << "tried to access" << idx << std::endl;
       } else {
         if (slots[idx] != " ") {
@@ -95,10 +98,11 @@ public:
 
     auto r = std::string{};
     r.reserve(width * height); // too lazy to do the math
+
     for (std::size_t i = 0; i < slots.size(); i++) {
       r += slots[i];
       if (i % width == width - 1)
-        r += "\n";
+        r += "|\n|";
     }
 
     return r;
@@ -108,11 +112,10 @@ public:
     auto planets = std::vector<Planet>();
     planets.reserve(n);
     for (int i = 0; i < n; i++) {
-      auto p =
-          Planet{Vec2<double>{1.0 * (rand() % max.x), 1.0 * (rand() % max.y)},
-                 Vec2<double>{1.0 * ((rand() % max.x) / 10),
-                              1.0 * ((rand() % max.y) / 10)},
-                 rand() % 5};
+      auto p = Planet{
+          Vec2<double>{1.0 * (rand() % max.x / 2), 1.0 * (rand() % max.y / 2)},
+          Vec2<double>{1.0 * ((rand() % 2) - 1), 1.0 * ((rand() % 2) - 1)},
+          rand() % 20 + 1};
       planets.push_back(p);
     }
     return Space{max, planets};

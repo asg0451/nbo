@@ -13,7 +13,8 @@ all: build/nbo
 clean:
 	rm -rf build/*
 
-build/%: src/*.cpp
-	$(CC) $(CC_OPTS) $^ -o $@ -I./src
+# $(CC) $(CC_OPTS) $^ -o $@ -I./src
+build/nbo: src/*.cpp src/*.h
+	$(CC) $(CC_OPTS) src/*.cpp -o $@ -I./src
 
 src/%.h: src/*.h
