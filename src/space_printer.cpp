@@ -1,6 +1,6 @@
 #include "space_printer.h"
 
-std::string SpacePrinter::pretty_print() const {
+std::string SpacePrinter::pretty_print(Space &space) {
   int width = 100, height = 44;
   // int width = 10, height = 10;
   double scale_x = 1.0 * width / space.max.x,
@@ -36,12 +36,4 @@ std::string SpacePrinter::pretty_print() const {
   }
 
   return r;
-}
-
-std::ostream &SpacePrinter::dump(std::ostream &o) const {
-  return o << "Space{" << space.planets << "}";
-}
-
-std::ostream &operator<<(std::ostream &o, const SpacePrinter &pp) {
-  return pp.dump(o);
 }

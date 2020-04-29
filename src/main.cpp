@@ -1,22 +1,20 @@
 // http://physics.princeton.edu/~fpretori/Nbody/intro.htm
 
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <memory>
+#include <mutex>
+#include <thread>
 #include <vector>
 
-#include <cstdlib> // for clear screen
-
 #include "planet.h"
+#include "render_thread.h"
+#include "simulate_thread.h"
 #include "space.h"
-#include "space_printer.h"
 #include "util.h"
 #include "vec2.h"
 
 int main() {
-  srand(time(NULL));
-  auto nticks = 2000;
-
+  // srand(time(NULL));
   // auto space = Space::make_random_space(Vec2{100, 100}, 3);
 
   // auto space = Space({10, 10}, std::vector<Planet>{
@@ -24,21 +22,32 @@ int main() {
   //                                  Planet{{0, 5}, {0, 0}, 10},
   //                              });
 
-  auto space = Space{{200, 80},
+  auto space = Space{0.1,
+                     {200, 80},
                      std::vector<Planet>{
                          Planet{{50, 60}, {0, 0}, 20},
                          Planet{{60, 60}, {1, -1}, 10},
                          Planet{{40, 20}, {0, .7}, 10},
                      }};
 
-  auto pp = SpacePrinter{space};
-  std::cout << pp << std::endl;
+  auto space_p = std::make_shared<Space>(space);
 
-  for (auto i = 0; i < nticks; i++) {
-    space.tick();
-    system("clear");
-    // std::cout << space << std::endl;
-    std::cout << pp.pretty_print() << std::endl;
-  }
+  // run thread: call tick as fast as possible
+  // ptr to shared space
+
+  // render thread: every so often, print
+  // ptr to shared space
+
+  auto mx = std::mutex{};
+
+  auto simulator = SimulateThread{space_p, 1, mx};
+  auto sth = simulator.start();
+
+  auto renderer = RenderThread{space_p, 100, mx};
+  auto rth = renderer.start();
+
+  rth.join();
+  sth.join();
+
   return 0;
 }

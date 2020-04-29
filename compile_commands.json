@@ -12,9 +12,63 @@
             "-I./src",
             "-o",
             "build/nbo",
+            "src/space_printer.cpp"
+        ],
+        "directory": "/home/miles/proj/nbo",
+        "file": "src/space_printer.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Werror",
+            "-Wextra",
+            "-Wpedantic",
+            "-std=c++17",
+            "-I./src",
+            "-o",
+            "build/nbo",
+            "src/planet.cpp"
+        ],
+        "directory": "/home/miles/proj/nbo",
+        "file": "src/planet.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Werror",
+            "-Wextra",
+            "-Wpedantic",
+            "-std=c++17",
+            "-I./src",
+            "-o",
+            "build/nbo",
             "src/main.cpp"
         ],
         "directory": "/home/miles/proj/nbo",
         "file": "src/main.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-g",
+            "-Wall",
+            "-Werror",
+            "-Wextra",
+            "-Wpedantic",
+            "-std=c++17",
+            "-I./src",
+            "-o",
+            "build/nbo",
+            "src/space.cpp"
+        ],
+        "directory": "/home/miles/proj/nbo",
+        "file": "src/space.cpp"
     }
 ]

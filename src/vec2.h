@@ -9,10 +9,7 @@
 template <typename T> class Vec2 {
 public:
   T x, y;
-  Vec2(T x, T y) : x(x), y(y){};
-  Vec2(const Vec2 &v) : x(v.x), y(v.y){};
-  Vec2(Vec2 &v) : x(v.x), y(v.y){};
-  Vec2(){};
+  // default constuctors
 
   double distance(const Vec2 &o) const {
     return std::abs(std::sqrt(std::pow(o.x - x, 2) + std::pow(o.y - y, 2)));
