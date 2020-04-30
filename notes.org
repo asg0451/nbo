@@ -1,0 +1,23 @@
+* TODOS
+** TODO c++20
+*** TODO async, atomic shared pty
+** TODO end threads via a (shared?) future
+** TODO parallelize simulation per tick?
+** TODO optimize simulation generally
+** TODO move simulation out of space
+** TODO google build / deps system
+** TODO leverage tl lib - tl::optional, .map, .and_then
+** TODO thread exception handling
+   - https://stackoverflow.com/questions/233127/how-can-i-propagate-exceptions-between-threads
+
+* cmake/conan
+** how to
+*** install deps
+    from build/: conan install ..
+*** compile
+    after running cmake first time
+    from build/: make
+*** add a new file
+    add it to src/CMakeLists.txt, then rerun cmake
+*** run cmake
+    from build/: cmake -DCMAKE_CXX_COMPILER=clang++ ..
