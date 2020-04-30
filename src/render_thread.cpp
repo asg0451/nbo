@@ -18,12 +18,15 @@ void RenderThread::run() {
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
   auto width = size.ws_col, height = size.ws_row;
 
+  // TODO: it doesnt call destructor when you abort the thread
+  // https://thispointer.com/c11-how-to-stop-or-terminate-a-thread/
+  auto hc = SpacePrinter::HideCursor{}; // RAII
+
   for (;;) { // no exit case. kill me when done
     {
       auto lock = std::scoped_lock(mx);
-      system("clear");
-      std::cout << SpacePrinter::pretty_print(*sp.get(), width, height)
-                << std::endl;
+      std::cout << SpacePrinter::pretty_print_term(*sp.get(), width, height);
+      std::cout.flush();
     }
     std::this_thread::sleep_for(std::chrono::milliseconds(sleep_milli));
   }

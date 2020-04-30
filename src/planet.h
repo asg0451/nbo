@@ -11,7 +11,7 @@ public:
   double mass;
   int id;
 
-  Planet(Vec2<double> loc, Vec2<double> vel, int mass)
+  Planet(Vec2<double> loc, Vec2<double> vel, double mass)
       : loc(loc), vel(vel), mass(mass), id(next_id++){};
   Planet(const Planet &p)
       : loc(p.loc), vel(p.vel), mass(p.mass),

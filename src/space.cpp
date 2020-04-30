@@ -29,7 +29,8 @@ void Space::tick() {
       // add to accel for p1
       // are these refs or values? assuming former. if nothing moves maybe
       // it's latter
-      auto cur_a = find_optional(accels, p1.id).value_or(Vec2<double>{0.0, 0.0});
+      auto cur_a =
+          find_optional(accels, p1.id).value_or(Vec2<double>{0.0, 0.0});
       cur_a = cur_a + fv / p1.mass;
       accels.insert({p1.id, cur_a});
     }
@@ -47,13 +48,13 @@ Space Space::make_random_space(Vec2<int> max, int n) {
   auto planets = std::vector<Planet>();
   planets.reserve(n);
   for (int i = 0; i < n; i++) {
-    auto p = Planet{
-        Vec2<double>{1.0 * (rand() % max.x / 2), 1.0 * (rand() % max.y / 2)},
-        Vec2<double>{1.0 * ((rand() % 2) - 1), 1.0 * ((rand() % 2) - 1)},
-        rand() % 20 + 1};
+    auto p =
+        Planet{Vec2<double>{1.0 * (rand() % max.x), 1.0 * (rand() % max.y)},
+               Vec2<double>{1.0 * ((rand() % 2) - 1), 1.0 * ((rand() % 2) - 1)},
+               1.0 * (rand() % 20) + 1};
     planets.push_back(p);
   }
-  return Space{max, planets};
+  return Space{0.0001, max, planets};
 }
 
 std::ostream &Space::dump(std::ostream &o) const {

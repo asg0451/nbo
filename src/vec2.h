@@ -6,6 +6,8 @@
 // TODO: how to use type traits to make this only work for primitives.
 // is_arithemetic, <type_traits>
 
+// TODO: move out impl
+
 template <typename T> class Vec2 {
 public:
   T x, y;
