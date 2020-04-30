@@ -13,7 +13,21 @@
 #include "util.h"
 #include "vec2.h"
 
+// JSON for testing not used
+#include <nlohmann/json.hpp>
+// for convenience
+using json = nlohmann::json;
+//
+
 int main() {
+
+  auto j2 = R"(
+  {
+    "happy": true,
+    "pi": 3.141
+  }
+)"_json;
+
   // srand(time(NULL));
   // auto space = Space::make_random_space({200, 100}, 3);
 

@@ -12,8 +12,12 @@
 
 * cmake/conan
 ** how to
+*** bear
+    bear make etc from build, mv to proj root
 *** install deps
     from build/: conan install ..
+*** add deps
+    add to conanfile.txt
 *** compile
     after running cmake first time
     from build/: make
