@@ -1,7 +1,12 @@
 #pragma once
 
+#include <array>
+#include <cstdio>
 #include <iostream>
+#include <memory>
 #include <optional>
+#include <stdexcept>
+#include <string>
 #include <typeinfo> // typeid
 #include <unordered_map>
 #include <vector>

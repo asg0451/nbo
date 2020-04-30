@@ -17,11 +17,6 @@ int main() {
   // srand(time(NULL));
   // auto space = Space::make_random_space(Vec2{100, 100}, 3);
 
-  // auto space = Space({10, 10}, std::vector<Planet>{
-  //                                  Planet{{0, 0}, {0, 0}, 10},
-  //                                  Planet{{0, 5}, {0, 0}, 10},
-  //                              });
-
   auto space = Space{0.1,
                      {200, 80},
                      std::vector<Planet>{
@@ -33,17 +28,15 @@ int main() {
   auto space_p = std::make_shared<Space>(space);
 
   // run thread: call tick as fast as possible
-  // ptr to shared space
-
   // render thread: every so often, print
-  // ptr to shared space
+  // mutex between them so you dont draw a partial state
 
   auto mx = std::mutex{};
 
   auto simulator = SimulateThread{space_p, 1, mx};
   auto sth = simulator.start();
 
-  auto renderer = RenderThread{space_p, 100, mx};
+  auto renderer = RenderThread{space_p, 50, mx};
   auto rth = renderer.start();
 
   rth.join();
