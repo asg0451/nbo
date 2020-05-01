@@ -63,9 +63,8 @@ int main() {
 
   auto mx = std::mutex{};
 
-  // TODO: make a superclass for these
-  auto simulator = SimulateThread{space_p, 0, mx};
-  auto renderer = RenderThread{space_p, 10, mx};
+  auto ren = RenderThread{mx, space_p, 10};
+  auto sim = SimulateThread{mx, space_p, 0};
 
   for (;;) {
     std::this_thread::sleep_for(std::chrono::milliseconds(100));

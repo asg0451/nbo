@@ -2,32 +2,32 @@
 
 #include "space.h"
 
-#include <future>
 #include <memory>
 #include <mutex>
-#include <thread>
 
-class SimulateThread {
-  std::shared_ptr<Space> sp;
-  int sleep_milli;
+#include "threader.h"
+
+class SimulateThread : Threader {
   std::mutex &mx;
-  bool stop;
-
-  void run();
+  std::shared_ptr<Space> space_p;
+  int sleep_millis;
 
 public:
-  std::thread th;
+  SimulateThread(std::mutex &mx, std::shared_ptr<Space> space_p,
+                 int sleep_millis)
+      : mx(mx), space_p(space_p), sleep_millis(sleep_millis){};
 
-  SimulateThread(std::shared_ptr<Space> sp, int sleep_milli, std::mutex &mx)
-      : sp(sp), sleep_milli(sleep_milli), mx(mx), stop(false),
-        th(std::thread(&SimulateThread::run, this)){
-
-        };
-
-  ~SimulateThread() {
-    stop = true;
-    if (th.joinable()) {
-      th.join();
+  void action() {
+    for (;;) {
+      if (stop) {
+        return;
+      }
+      {
+        auto lock = std::scoped_lock(mx);
+        space_p.get()->tick();
+      }
+      if (sleep_millis > 0)
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
     }
   }
 };
