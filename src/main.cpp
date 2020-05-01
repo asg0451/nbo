@@ -19,6 +19,19 @@
 // #include <nlohmann/json.hpp>
 // // for convenience
 // using json = nlohmann::json;
+//   auto j = json{
+//       {"x", {1, 2, 3}},
+//   };
+//   j["y"] = "hello";
+//   auto j2 = R"(
+//   {
+//     "happy": true,
+//     "pi": 3.141
+//   }
+// )"_json;
+
+//   std::cout << j.dump(2) << std::endl;
+//   return 0;
 // //
 
 std::atomic<bool> quit(false); // signal flag
@@ -26,19 +39,6 @@ std::atomic<bool> quit(false); // signal flag
 void pls_quit(int) { quit.store(true); }
 
 int main() {
-  //   auto j = json{
-  //       {"x", {1, 2, 3}},
-  //   };
-  //   j["y"] = "hello";
-  //   auto j2 = R"(
-  //   {
-  //     "happy": true,
-  //     "pi": 3.141
-  //   }
-  // )"_json;
-
-  //   std::cout << j.dump(2) << std::endl;
-  //   return 0;
 
   std::signal(SIGINT, pls_quit);
 
@@ -63,6 +63,7 @@ int main() {
 
   auto mx = std::mutex{};
 
+  // TODO: make a superclass for these
   auto simulator = SimulateThread{space_p, 0, mx};
   auto renderer = RenderThread{space_p, 10, mx};
 

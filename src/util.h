@@ -5,11 +5,10 @@
 #include <iostream>
 #include <memory>
 #include <optional>
-#include <stdexcept>
-#include <string>
-#include <typeinfo> // typeid
 #include <unordered_map>
 #include <vector>
+
+#include "vec2.h"
 
 // print an int vector - for convenience. this is probably a really bad idea..
 template <typename E>
@@ -24,16 +23,9 @@ std::ostream &operator<<(std::ostream &o, const std::vector<E> &vec) {
 
 // print an unorderd map
 template <typename K, typename V>
-std::ostream &operator<<(std::ostream &o, const std::unordered_map<K, V> &map) {
-  // o << "Map<" << typeid(K).name() << ", " << typeid(V).name() << ">(";
-  o << "{";
-  for (auto &e : map) {
-    o << e.first << ": " << e.second << ", ";
-  }
-  o << "}";
-  return o;
-}
+std::ostream &operator<<(std::ostream &, const std::unordered_map<K, V> &);
 
+namespace util {
 // this returns a value not a ref i think..
 template <typename K, typename V>
 std::optional<V> find_optional(const std::unordered_map<K, V> &map, K k) {
@@ -56,3 +48,6 @@ std::string string_format(const std::string &format, Args... args) {
   return std::string(buf.get(),
                      buf.get() + size - 1); // We don't want the '\0' inside
 }
+
+Vec2<int> get_terminal_dimensions();
+} // namespace util

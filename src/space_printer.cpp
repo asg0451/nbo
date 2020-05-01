@@ -1,6 +1,5 @@
 #include "space_printer.h"
 #include "util.h"
-#include "vec2.h"
 
 #include <tuple>
 #include <unordered_map>
@@ -8,7 +7,7 @@
 // TODO: overlay a grid and follow center of mass of the system / planet 0 ?
 
 std::string SpacePrinter::cursor_move(int x, int y) {
-  return string_format("%c[%d;%df", 0x1B, y, x);
+  return util::string_format("%c[%d;%df", 0x1B, y, x);
 }
 
 std::string SpacePrinter::pretty_print_term(Space &space, int width,

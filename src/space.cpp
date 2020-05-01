@@ -1,5 +1,5 @@
 #include "space.h"
-#include "vec2.h"
+#include "util.h"
 
 // naive & shitty, n^2 in space & time
 void Space::tick() {
@@ -30,7 +30,7 @@ void Space::tick() {
       // are these refs or values? assuming former. if nothing moves maybe
       // it's latter
       auto cur_a =
-          find_optional(accels, p1.id).value_or(Vec2<double>{0.0, 0.0});
+          util::find_optional(accels, p1.id).value_or(Vec2<double>{0.0, 0.0});
       cur_a = cur_a + fv / p1.mass;
       accels.insert({p1.id, cur_a});
     }
