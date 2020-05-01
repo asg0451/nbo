@@ -80,7 +80,9 @@ int main() {
 
   auto renderer = Threader{[&mx, space_p](std::atomic<bool> &stop) {
     auto dim = util::get_terminal_dimensions();
-    auto hc = SpacePrinter::HideCursor{}; // RAII
+
+    auto hc = SpacePrinter::HideCursor{};
+    auto cs = SpacePrinter::ClearScreen{};
 
     for (;;) {
       if (stop) {

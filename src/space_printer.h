@@ -27,4 +27,12 @@ public:
       std::cout.flush();
     }
   };
+
+  class ClearScreen {
+  public:
+    ~ClearScreen() {
+      std::cout << std::endl << clear << std::endl;
+      std::cout.flush();
+    }
+  };
 };
