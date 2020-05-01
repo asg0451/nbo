@@ -1,5 +1,7 @@
 // http://physics.princeton.edu/~fpretori/Nbody/intro.htm
 
+#include <csignal>
+#include <future>
 #include <iostream>
 #include <memory>
 #include <mutex>
@@ -13,20 +15,32 @@
 #include "util.h"
 #include "vec2.h"
 
-// JSON for testing not used
-#include <nlohmann/json.hpp>
-// for convenience
-using json = nlohmann::json;
-//
+// // JSON for testing not used
+// #include <nlohmann/json.hpp>
+// // for convenience
+// using json = nlohmann::json;
+// //
+
+std::atomic<bool> quit(false); // signal flag
+
+void pls_quit(int) { quit.store(true); }
 
 int main() {
+  //   auto j = json{
+  //       {"x", {1, 2, 3}},
+  //   };
+  //   j["y"] = "hello";
+  //   auto j2 = R"(
+  //   {
+  //     "happy": true,
+  //     "pi": 3.141
+  //   }
+  // )"_json;
 
-  auto j2 = R"(
-  {
-    "happy": true,
-    "pi": 3.141
-  }
-)"_json;
+  //   std::cout << j.dump(2) << std::endl;
+  //   return 0;
+
+  std::signal(SIGINT, pls_quit);
 
   // srand(time(NULL));
   // auto space = Space::make_random_space({200, 100}, 3);
@@ -50,13 +64,15 @@ int main() {
   auto mx = std::mutex{};
 
   auto simulator = SimulateThread{space_p, 0, mx};
-  auto sth = simulator.start();
-
   auto renderer = RenderThread{space_p, 10, mx};
-  auto rth = renderer.start();
 
-  rth.join();
-  sth.join();
+  for (;;) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    if (quit.load()) {
+      std::cout << "stopping.." << std::endl;
+      break;
+    }
+  }
 
   return 0;
 }
