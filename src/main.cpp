@@ -15,6 +15,8 @@
 #include "util.h"
 #include "vec2.h"
 
+#include "threader.h"
+
 // // JSON for testing not used
 // #include <nlohmann/json.hpp>
 // // for convenience
@@ -63,15 +65,41 @@ int main() {
 
   auto mx = std::mutex{};
 
-  // TODO: make a superclass for these
-  auto simulator = SimulateThread{space_p, 0, mx};
-  auto renderer = RenderThread{space_p, 10, mx};
+  auto simulator = Threader{[&mx, space_p](volatile bool &stop) {
+    for (;;) {
+      if (stop) {
+        return;
+      }
+      {
+        auto lock = std::scoped_lock(mx);
+        space_p.get()->tick();
+      }
+      std::this_thread::sleep_for(std::chrono::milliseconds(0));
+    }
+  }};
+
+  auto renderer = Threader{[&mx, space_p](volatile bool &stop) {
+    auto dim = util::get_terminal_dimensions();
+    auto hc = SpacePrinter::HideCursor{}; // RAII
+
+    for (;;) {
+      if (stop) {
+        return;
+      }
+      {
+        auto lock = std::scoped_lock(mx);
+        std::cout << SpacePrinter::pretty_print_term(*space_p.get(), dim.x,
+                                                     dim.y);
+        std::cout.flush();
+      }
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+  }};
 
   for (;;) {
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     if (quit.load()) {
-      std::cout << "stopping.." << std::endl;
-      break;
+      return 1;
     }
   }
 

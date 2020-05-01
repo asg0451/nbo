@@ -15,6 +15,7 @@ class Space {
 public:
   Vec2<int> max;
   std::vector<Planet> planets;
+  int tick_num = 0;
 
   Space(Vec2<int> max, std::vector<Planet> planets)
       : max(max), planets(planets){};

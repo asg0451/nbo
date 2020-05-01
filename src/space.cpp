@@ -42,6 +42,7 @@ void Space::tick() {
     auto a = accels[p.id];
     p.vel += a * dt;
   }
+  tick_num++;
 }
 
 Space Space::make_random_space(Vec2<int> max, int n) {
