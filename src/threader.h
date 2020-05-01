@@ -6,12 +6,9 @@
 #include <memory>
 #include <mutex>
 #include <thread>
-template <typename F> class Threader {
-  // typedef void (*action_t)(std::shared_ptr<S>, int &, std::mutex &, bool &,
-  //                          ActionArgs...);
-
-  volatile bool stop; // TODO: should be atomic bool
-  F action;
+template <typename F> class Threader final {
+  std::atomic<bool> stop;
+  F action; // stop -> *
 
 public:
   void run() {

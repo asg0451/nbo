@@ -65,7 +65,7 @@ int main() {
 
   auto mx = std::mutex{};
 
-  auto simulator = Threader{[&mx, space_p](volatile bool &stop) {
+  auto simulator = Threader{[&mx, space_p](std::atomic<bool> &stop) {
     for (;;) {
       if (stop) {
         return;
@@ -78,7 +78,7 @@ int main() {
     }
   }};
 
-  auto renderer = Threader{[&mx, space_p](volatile bool &stop) {
+  auto renderer = Threader{[&mx, space_p](std::atomic<bool> &stop) {
     auto dim = util::get_terminal_dimensions();
     auto hc = SpacePrinter::HideCursor{}; // RAII
 
