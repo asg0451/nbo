@@ -8,25 +8,33 @@
 #include <mutex>
 #include <thread>
 
-class RenderThread {
-  std::shared_ptr<Space> sp;
-  int sleep_milli;
-  std::mutex &mx;
-  volatile bool stop;
+#include "threader.h"
 
-  void run();
+class RenderThread : Threader {
+  std::mutex &mx;
+  std::shared_ptr<Space> space_p;
+  int sleep_millis;
 
 public:
-  std::thread th;
+  RenderThread(std::mutex &mx, std::shared_ptr<Space> space_p, int sleep_millis)
+      : mx(mx), space_p(space_p), sleep_millis(sleep_millis){};
 
-  RenderThread(std::shared_ptr<Space> sp, int sleep_milli, std::mutex &mx)
-      : sp(sp), sleep_milli(sleep_milli), mx(mx), stop(false),
-        th(std::thread(&RenderThread::run, this)){};
+  void action() {
+    auto dim = util::get_terminal_dimensions();
+    auto hc = SpacePrinter::HideCursor{}; // RAII
 
-  ~RenderThread() {
-    stop = true;
-    if (th.joinable()) {
-      th.join();
+    for (;;) {
+      if (stop) {
+        return;
+      }
+      {
+        auto lock = std::scoped_lock(mx);
+        std::cout << SpacePrinter::pretty_print_term(*space_p.get(), dim.x,
+                                                     dim.y);
+        std::cout.flush();
+      }
+      if (sleep_millis > 0)
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
     }
   }
 };
