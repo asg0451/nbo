@@ -1,7 +1,7 @@
 * TODOS
 ** TODO c++20
 *** TODO async, atomic shared pty
-** TODO end threads via a (shared?) future
+** DONE end threads via a (shared?) future
 ** TODO parallelize simulation per tick?
 ** TODO optimize simulation generally
 ** TODO move simulation out of space
@@ -9,6 +9,13 @@
 ** TODO leverage tl lib - tl::optional, .map, .and_then
 ** TODO thread exception handling
    - https://stackoverflow.com/questions/233127/how-can-i-propagate-exceptions-between-threads
+** TODO thingy to get sim accuracy
+   - run the simulation over & over at different time steps and look at eg 5-6 seconds and compare positions. narrow in on a ts that gives <N% variance or something
+** TODO report ticks / sec (perf) and using dt give a real-world time
+** TODO planet path breadcrumbs
+** TODO planet velocity indicators?
+** TODO real graphics
+** TODO 3d
 
 * cmake/conan
 ** how to

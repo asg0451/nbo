@@ -12,24 +12,28 @@
 #include <vector>
 
 class Space {
-  const double G = 1; // for simplicity
-  // const double G = 6.674 * std::pow(10, -11);
+  double G = 1;    // for simplicity
   double dt = 0.1; // sec
 
 public:
-  Vec2<int> max;
+  constexpr static const double G_real =
+      0.00000000006674; // 6.674 * std::pow(10, -11);
+  Vec2<double> max;
   std::vector<Planet> planets;
   SpaceStats stats = SpaceStats{};
 
-  Space(Vec2<int> max, std::vector<Planet> planets)
+  Space(Vec2<double> max, std::vector<Planet> planets)
       : max(max), planets(planets){};
 
-  Space(double dt, Vec2<int> max, std::vector<Planet> planets)
+  Space(double dt, Vec2<double> max, std::vector<Planet> planets)
       : dt(dt), max(max), planets(planets){};
+
+  Space(double G, double dt, Vec2<double> max, std::vector<Planet> planets)
+      : G(G), dt(dt), max(max), planets(planets){};
 
   void tick();
 
-  static Space make_random_space(Vec2<int> max, int n);
+  static Space make_random_space(Vec2<double> max, int n);
 
   std::ostream &dump(std::ostream &o) const;
 };

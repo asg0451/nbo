@@ -28,6 +28,13 @@ public:
     return v;
   }
 
+  Vec2<T> operator+(const T &t) const {
+    auto v = Vec2<T>{*this};
+    v.x += t;
+    v.y += t;
+    return v;
+  }
+
   Vec2<T> operator-(const Vec2<T> &o) const {
     auto v = Vec2<T>{*this};
     v.x -= o.x;
@@ -55,13 +62,15 @@ public:
     return v;
   }
 
-  Vec2<T> scaled() const {
+  Vec2<T> unit() const {
     auto v = Vec2<T>{*this};
-    auto mag = v.distance({0, 0});
-    v.x /= mag;
-    v.y /= mag;
+    auto m = mag();
+    v.x /= m;
+    v.y /= m;
     return v;
   }
+
+  static Vec2<T> zero() { return Vec2<T>{0, 0}; }
 };
 
 template <typename T>

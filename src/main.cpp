@@ -1,5 +1,6 @@
 // http://physics.princeton.edu/~fpretori/Nbody/intro.htm
 
+#include <algorithm> // transform
 #include <csignal>
 #include <functional>
 #include <future>
@@ -10,13 +11,13 @@
 #include <vector>
 
 #include "planet.h"
+#include "real_values.h"
 #include "render_thread.h"
 #include "simulate_thread.h"
 #include "space.h"
+#include "threader.h"
 #include "util.h"
 #include "vec2.h"
-
-#include "threader.h"
 
 // // JSON for testing not used
 // #include <nlohmann/json.hpp>
@@ -42,18 +43,27 @@ std::atomic<bool> quit(false); // signal flag
 void pls_quit(int) { quit.store(true); }
 
 int main() {
-
   std::signal(SIGINT, pls_quit);
+  srand(time(NULL));
 
-  // srand(time(NULL));
-  // auto space = Space::make_random_space({200, 100}, 3);
+  auto solar_system_dimensions =
+      Vec2<double>{1000 * nasa_radius_factor, 500 * nasa_radius_factor};
+  auto sun =
+      Planet{solar_system_dimensions / 2, Vec2<double>::zero(), mass_of_sun};
+  auto planets = std::vector<Planet>{sun};
+  std::transform(real_planets.begin(), real_planets.end(),
+                 std::back_inserter(planets), [&sun](auto p) {
+                   auto loc = Vec2<double>{p.orbit_radius, 0} + sun.loc;
+                   auto vel = Vec2<double>{0, p.orbit_speed};
+                   return Planet{loc, vel, p.mass};
+                 });
+  auto solar_system =
+      Space{Space::G_real, 0.1, solar_system_dimensions, planets};
 
-  // run thread: call tick as fast as possible
-  // render thread: every so often, print
-  // mutex between them so you dont draw a partial state
+  // auto space_p = std::make_shared<Space>(solar_system);
 
   auto space_p = std::make_shared<Space>(
-      Space{0.0001,
+      Space{0.00001,
             {200, 100},
             std::vector<Planet>{
                 Planet{{50, 60}, {0, 0}, 20}, Planet{{60, 60}, {1, -1}, 10},
@@ -61,6 +71,9 @@ int main() {
                 // Planet{{20, 20}, {0, 0}, 10000000000}, // why doesnt this
                 // suck everything in?
             }});
+
+  // auto space_p =
+  //     std::make_shared<Space>(Space::make_random_space({200, 100}, 10));
 
   auto mx = std::mutex{};
   auto renderer = Threader{renderer_action(mx, space_p, 10)};

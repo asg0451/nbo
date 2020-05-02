@@ -26,12 +26,12 @@ void Space::tick() {
       // newton
       auto f_s = G * p1.mass * p2.mass / std::pow(distance, 2);
       // turn that into a vector
-      auto fv = (p2.loc - p1.loc).scaled() * f_s;
+      auto fv = (p2.loc - p1.loc).unit() * f_s;
       // f/m=a
       // add to accel for p1
       // are these refs or values? assuming former
       auto cur_a =
-          util::find_optional(accels, p1.id).value_or(Vec2<double>{0.0, 0.0});
+          util::find_optional(accels, p1.id).value_or(Vec2<double>::zero());
       cur_a = cur_a + fv / p1.mass;
       accels.insert({p1.id, cur_a});
     }
@@ -46,21 +46,21 @@ void Space::tick() {
   stats.log_tick();
 }
 
-Space Space::make_random_space(Vec2<int> max, int n) {
+Space Space::make_random_space(Vec2<double> max, int n) {
   auto planets = std::vector<Planet>();
   planets.reserve(n);
   for (int i = 0; i < n; i++) {
-    auto p =
-        Planet{Vec2<double>{1.0 * (rand() % max.x), 1.0 * (rand() % max.y)},
-               Vec2<double>{1.0 * ((rand() % 2) - 1), 1.0 * ((rand() % 2) - 1)},
-               1.0 * (rand() % 20) + 1};
+    auto p = Planet{
+        Vec2<double>{1.0 * (rand() % int(max.x)), 1.0 * (rand() % int(max.y))},
+        Vec2<double>{1.0 * ((rand() % 2) - 1), 1.0 * ((rand() % 2) - 1)},
+        1.0 * (rand() % 20) + 1};
     planets.push_back(p);
   }
   return Space{0.0001, max, planets};
 }
 
 std::ostream &Space::dump(std::ostream &o) const {
-  o << "Space(dt = " << dt << "){" << planets << "}(";
+  o << "Space(dt = " << dt << ", max = " << max << "){" << planets << "}(";
   stats.dump(o);
   return o << ")";
 }
