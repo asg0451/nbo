@@ -17,6 +17,10 @@ public:
     return std::abs(std::sqrt(std::pow(o.x - x, 2) + std::pow(o.y - y, 2)));
   }
 
+  double mag() const {
+    return std::abs(std::sqrt(std::pow(x, 2) + std::pow(y, 2)));
+  }
+
   Vec2<T> operator+(const Vec2<T> &o) const {
     auto v = Vec2<T>{*this};
     v.x += o.x;

@@ -13,22 +13,23 @@ void Space::tick() {
   accels.reserve(std::pow(planets.size(), 2));
 
   for (const auto &p1 : planets) {
+    stats.log_speed(p1.vel.mag());
+
     for (const auto &p2 : planets) {
       if (p1 == p2)
         continue;
-      // newton
-      auto f_s = G * p1.mass * p2.mass / std::pow(p2.loc.distance(p1.loc), 2);
 
+      auto distance = p2.loc.distance(p1.loc);
+
+      stats.log_distance(distance);
+
+      // newton
+      auto f_s = G * p1.mass * p2.mass / std::pow(distance, 2);
       // turn that into a vector
       auto fv = (p2.loc - p1.loc).scaled() * f_s;
-
-      // std::cout << p1 << ": "
-      //           << "fv = " << fv << std::endl;
-
       // f/m=a
       // add to accel for p1
-      // are these refs or values? assuming former. if nothing moves maybe
-      // it's latter
+      // are these refs or values? assuming former
       auto cur_a =
           util::find_optional(accels, p1.id).value_or(Vec2<double>{0.0, 0.0});
       cur_a = cur_a + fv / p1.mass;
@@ -36,13 +37,13 @@ void Space::tick() {
     }
   }
 
-  // std::cout << "accels:" << accels << std::endl;
   // apply all accel updates
   for (auto &p : planets) {
     auto a = accels[p.id];
     p.vel += a * dt;
   }
-  tick_num++;
+
+  stats.log_tick();
 }
 
 Space Space::make_random_space(Vec2<int> max, int n) {
@@ -59,5 +60,7 @@ Space Space::make_random_space(Vec2<int> max, int n) {
 }
 
 std::ostream &Space::dump(std::ostream &o) const {
-  return o << "Space{" << planets << "}";
+  o << "Space(dt = " << dt << "){" << planets << "}(";
+  stats.dump(o);
+  return o << ")";
 }

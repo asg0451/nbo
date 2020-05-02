@@ -5,12 +5,13 @@
 #include <iostream>
 #include <memory>
 #include <optional>
+#include <string>
 #include <unordered_map>
 #include <vector>
 
 #include "vec2.h"
 
-// print an int vector - for convenience. this is probably a really bad idea..
+// print a vector - for convenience
 template <typename E>
 std::ostream &operator<<(std::ostream &o, const std::vector<E> &vec) {
   o << "Vector<" << typeid(E).name() << ">(";

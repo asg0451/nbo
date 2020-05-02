@@ -11,7 +11,7 @@ Threader::Action renderer_action(std::mutex &mx, std::shared_ptr<Space> space_p,
     auto dim = util::get_terminal_dimensions();
 
     auto hc = SpacePrinter::HideCursor{};
-    auto cs = SpacePrinter::ClearScreen{};
+    // auto cs = SpacePrinter::ClearScreen{};
 
     for (;;) {
       if (stop) {
