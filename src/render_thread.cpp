@@ -5,9 +5,9 @@
 #include <mutex>
 #include <thread>
 
-Threader::Action renderer_action(std::mutex &mx,
-                                 std::shared_ptr<Space> space_p) {
-  return [&mx, space_p](std::atomic<bool> &stop) {
+Threader::Action renderer_action(std::mutex &mx, std::shared_ptr<Space> space_p,
+                                 int sleep_millis) {
+  return [&mx, space_p, sleep_millis](std::atomic<bool> &stop) {
     auto dim = util::get_terminal_dimensions();
 
     auto hc = SpacePrinter::HideCursor{};
@@ -23,7 +23,8 @@ Threader::Action renderer_action(std::mutex &mx,
                                                      dim.y);
         std::cout.flush();
       }
-      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+      if (sleep_millis > 0)
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
     }
   };
 }

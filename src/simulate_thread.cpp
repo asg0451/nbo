@@ -10,8 +10,9 @@
 #include <thread>
 
 Threader::Action simulator_action(std::mutex &mx,
-                                  std::shared_ptr<Space> space_p) {
-  return [&mx, space_p](std::atomic<bool> &stop) {
+                                  std::shared_ptr<Space> space_p,
+                                  int sleep_millis) {
+  return [&mx, space_p, sleep_millis](std::atomic<bool> &stop) {
     for (;;) {
       if (stop) {
         return;
@@ -20,7 +21,8 @@ Threader::Action simulator_action(std::mutex &mx,
         auto lock = std::scoped_lock(mx);
         space_p.get()->tick();
       }
-      std::this_thread::sleep_for(std::chrono::milliseconds(0));
+      if (sleep_millis > 0)
+        std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
     }
   };
 }
