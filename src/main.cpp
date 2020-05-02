@@ -1,6 +1,7 @@
 // http://physics.princeton.edu/~fpretori/Nbody/intro.htm
 
 #include <csignal>
+#include <functional>
 #include <future>
 #include <iostream>
 #include <memory>
@@ -57,46 +58,19 @@ int main() {
                 // suck everything in?
             }};
 
-  auto space_p = std::make_shared<Space>(space);
-
   // run thread: call tick as fast as possible
   // render thread: every so often, print
   // mutex between them so you dont draw a partial state
 
+  auto space_p = std::make_shared<Space>(space);
   auto mx = std::mutex{};
+  mx.unlock(); // dbg
 
-  auto simulator = Threader{[&mx, space_p](std::atomic<bool> &stop) {
-    for (;;) {
-      if (stop) {
-        return;
-      }
-      {
-        auto lock = std::scoped_lock(mx);
-        space_p.get()->tick();
-      }
-      std::this_thread::sleep_for(std::chrono::milliseconds(0));
-    }
-  }};
+  auto ra = renderer_action(mx, space_p);
+  auto renderer = Threader{ra};
 
-  auto renderer = Threader{[&mx, space_p](std::atomic<bool> &stop) {
-    auto dim = util::get_terminal_dimensions();
-
-    auto hc = SpacePrinter::HideCursor{};
-    auto cs = SpacePrinter::ClearScreen{};
-
-    for (;;) {
-      if (stop) {
-        return;
-      }
-      {
-        auto lock = std::scoped_lock(mx);
-        std::cout << SpacePrinter::pretty_print_term(*space_p.get(), dim.x,
-                                                     dim.y);
-        std::cout.flush();
-      }
-      std::this_thread::sleep_for(std::chrono::milliseconds(10));
-    }
-  }};
+  auto sa = simulator_action(mx, space_p);
+  auto simulator = Threader{sa};
 
   for (;;) {
     std::this_thread::sleep_for(std::chrono::milliseconds(100));

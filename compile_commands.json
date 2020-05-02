@@ -12,63 +12,6 @@
             "-Wpedantic",
             "-pthread",
             "-o",
-            "CMakeFiles/nbo.dir/simulate_thread.cpp.o",
-            "../../src/simulate_thread.cpp"
-        ],
-        "directory": "/home/miles/proj/nbo/build/src",
-        "file": "../../src/simulate_thread.cpp"
-    },
-    {
-        "arguments": [
-            "c++",
-            "-c",
-            "-I/home/miles/.conan/data/nlohmann_json/3.7.3/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
-            "-std=c++17",
-            "-g",
-            "-Wall",
-            "-Werror",
-            "-Wextra",
-            "-Wpedantic",
-            "-pthread",
-            "-o",
-            "CMakeFiles/nbo.dir/space_printer.cpp.o",
-            "../../src/space_printer.cpp"
-        ],
-        "directory": "/home/miles/proj/nbo/build/src",
-        "file": "../../src/space_printer.cpp"
-    },
-    {
-        "arguments": [
-            "c++",
-            "-c",
-            "-I/home/miles/.conan/data/nlohmann_json/3.7.3/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
-            "-std=c++17",
-            "-g",
-            "-Wall",
-            "-Werror",
-            "-Wextra",
-            "-Wpedantic",
-            "-pthread",
-            "-o",
-            "CMakeFiles/nbo.dir/planet.cpp.o",
-            "../../src/planet.cpp"
-        ],
-        "directory": "/home/miles/proj/nbo/build/src",
-        "file": "../../src/planet.cpp"
-    },
-    {
-        "arguments": [
-            "c++",
-            "-c",
-            "-I/home/miles/.conan/data/nlohmann_json/3.7.3/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
-            "-std=c++17",
-            "-g",
-            "-Wall",
-            "-Werror",
-            "-Wextra",
-            "-Wpedantic",
-            "-pthread",
-            "-o",
             "CMakeFiles/nbo.dir/main.cpp.o",
             "../../src/main.cpp"
         ],
@@ -88,48 +31,29 @@
             "-Wpedantic",
             "-pthread",
             "-o",
-            "CMakeFiles/nbo.dir/util.cpp.o",
-            "../../src/util.cpp"
-        ],
-        "directory": "/home/miles/proj/nbo/build/src",
-        "file": "../../src/util.cpp"
-    },
-    {
-        "arguments": [
-            "c++",
-            "-c",
-            "-I/home/miles/.conan/data/nlohmann_json/3.7.3/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
-            "-std=c++17",
-            "-g",
-            "-Wall",
-            "-Werror",
-            "-Wextra",
-            "-Wpedantic",
-            "-pthread",
-            "-o",
-            "CMakeFiles/nbo.dir/space.cpp.o",
-            "../../src/space.cpp"
-        ],
-        "directory": "/home/miles/proj/nbo/build/src",
-        "file": "../../src/space.cpp"
-    },
-    {
-        "arguments": [
-            "c++",
-            "-c",
-            "-I/home/miles/.conan/data/nlohmann_json/3.7.3/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
-            "-std=c++17",
-            "-g",
-            "-Wall",
-            "-Werror",
-            "-Wextra",
-            "-Wpedantic",
-            "-pthread",
-            "-o",
             "CMakeFiles/nbo.dir/render_thread.cpp.o",
             "../../src/render_thread.cpp"
         ],
         "directory": "/home/miles/proj/nbo/build/src",
         "file": "../../src/render_thread.cpp"
+    },
+    {
+        "arguments": [
+            "c++",
+            "-c",
+            "-I/home/miles/.conan/data/nlohmann_json/3.7.3/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
+            "-std=c++17",
+            "-g",
+            "-Wall",
+            "-Werror",
+            "-Wextra",
+            "-Wpedantic",
+            "-pthread",
+            "-o",
+            "CMakeFiles/nbo.dir/simulate_thread.cpp.o",
+            "../../src/simulate_thread.cpp"
+        ],
+        "directory": "/home/miles/proj/nbo/build/src",
+        "file": "../../src/simulate_thread.cpp"
     }
 ]
