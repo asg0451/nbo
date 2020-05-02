@@ -64,13 +64,9 @@ int main() {
 
   auto space_p = std::make_shared<Space>(space);
   auto mx = std::mutex{};
-  mx.unlock(); // dbg
 
-  auto ra = renderer_action(mx, space_p);
-  auto renderer = Threader{ra};
-
-  auto sa = simulator_action(mx, space_p);
-  auto simulator = Threader{sa};
+  auto renderer = Threader{renderer_action(mx, space_p)};
+  auto simulator = Threader{simulator_action(mx, space_p)};
 
   for (;;) {
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
