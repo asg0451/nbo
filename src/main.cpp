@@ -74,20 +74,22 @@ int main() {
 
   // auto space_p =
   //     std::make_shared<Space>(Space::make_random_space({200, 100}, 10));
+  {
+    auto mx = std::mutex{};
+    auto renderer = Threader{renderer_action(mx, space_p, 10)};
+    auto simulator = Threader{simulator_action(mx, space_p, 0)};
 
-  auto mx = std::mutex{};
-  auto renderer = Threader{renderer_action(mx, space_p, 10)};
-  auto simulator = Threader{simulator_action(mx, space_p, 0)};
-
-  for (;;) {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    if (quit.load()) {
-      std::cout << std::endl;
-      space_p->dump(std::cout);
-      std::cout << std::endl;
-      return 1;
+    for (;;) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(100));
+      if (quit.load()) {
+        break;
+      }
     }
   }
+
+  std::cout << std::endl;
+  space_p->dump(std::cout);
+  std::cout << std::endl;
 
   return 0;
 }

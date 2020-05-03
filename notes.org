@@ -17,6 +17,25 @@
 ** TODO real graphics
 ** TODO 3d
 
+* tools etc
+** clang-format on only a block?
+** clang-modernize
+** clang-check?, clang-cl?, clang-replace?, clang-tidy?
+** clang++ --analyze -Xanalyzer -analyzer-output=text x.cpp
+** clang++ -g -fsantize=address{,-full (expensive)} (for debug build?)
+** clang++ -g -fsantize=thread (for debug build?)
+** clang++ -g -fsantize=memory (for debug build?) (expensive)
+** clang++ -g -fsantize=behavior (for debug build?)
+** more??
+
+* notes
+** override keyword
+** virtual destructor
+** "dont use delete as the instigator for the synchronized destruction of an object"
+
+* questions
+** lock_guard vs unique_lock
+
 * cmake/conan
 ** how to
 *** bear

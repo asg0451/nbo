@@ -1,0 +1,7 @@
+normal:
+	cmake .. -DUSE_SANITIZER=no -DUSE_ANALYZER=no && make
+analyze:
+	cmake .. -DUSE_ANALYZER=true && make
+
+tsan:
+	cmake .. -DUSE_SANITIZER=thread && make

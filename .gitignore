@@ -1,3 +1,4 @@
 core
-build/
+build/*
 !build/.keep
+!build/Makefile.meta
