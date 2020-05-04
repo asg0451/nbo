@@ -17,8 +17,8 @@ public:
 };
 
 constexpr double nasa_mass_factor = 10e24;    // kg
-constexpr double nasa_radius_factor = 10e9;   // 10^6 km
-constexpr double nasa_speed_factor = 1000;    // km/s
+constexpr double nasa_radius_factor = 10e9;   // m
+constexpr double nasa_speed_factor = 1000;    // m/s
 constexpr double mass_of_sun = 1.989 * 10e30; // kg
 
 const auto real_planets = std::vector<SolarBodyInfo>{

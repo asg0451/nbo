@@ -57,7 +57,8 @@ int main() {
                    auto vel = Vec2<double>{0, p.orbit_speed};
                    return Planet{loc, vel, p.mass};
                  });
-  auto solar_system = Space{Space::G_real, 1, solar_system_dimensions, planets};
+  auto solar_system =
+      Space{Space::G_real, 10, solar_system_dimensions, planets};
 
   auto space_p = std::make_shared<Space>(solar_system);
 

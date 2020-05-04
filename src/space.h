@@ -15,7 +15,9 @@ class Space {
   double dt = 0.1; // sec
 
 public:
-  constexpr static const double G_real = 6.674 * 10e-11;
+  // *10^-11 idk why this is like this but it works
+  // TODO wtf. maybe an off by one order of magniture error somewhere else
+  constexpr static const double G_real = 6.674 * 10e-12;
   Vec2<double> max;
   std::vector<Planet> planets;
   SpaceStats stats = SpaceStats{};
