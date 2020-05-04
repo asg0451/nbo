@@ -4,7 +4,7 @@ project(nbo)
 enable_language(CXX)
 
 # TODO: this is not where this stuff is supposed to go
-add_definitions("-std=c++17 -g -Wall -Werror -Wextra -Wpedantic")
+add_definitions("-std=c++17 -Wall -Werror -Wextra -Wpedantic")
 # -g -Wall -Werror -Wextra -Wpedantic -std=c++17 -lpthread
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)

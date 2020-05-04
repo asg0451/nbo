@@ -3,5 +3,21 @@ normal:
 analyze:
 	cmake .. -DUSE_ANALYZER=true && make
 
+debug:
+	cmake -DCMAKE_BUILD_TYPE=Debug .. && make
+release:
+	cmake -DCMAKE_BUILD_TYPE=Release .. && make
+# Possible values are empty, Debug, Release, RelWithDebInfo and MinSizeRel
+
+allsan: tsan asan usan msan lsan normal
+
 tsan:
 	cmake .. -DUSE_SANITIZER=thread && make
+asan:
+	cmake .. -DUSE_SANITIZER=address && make
+usan:
+	cmake .. -DUSE_SANITIZER=undefined && make
+msan:
+	cmake .. -DUSE_SANITIZER=memory && make
+lsan:
+	cmake .. -DUSE_SANITIZER=leak && make
