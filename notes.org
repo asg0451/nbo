@@ -18,6 +18,9 @@
 ** TODO 3d
 ** TODO asserts
 ** TODO move simulation, dt out of space. is space even a good abstraction? probably not
+** TODO use clang-tidy (apt install clang-tidy)
+   - clang-tidy -header-filter=.* -checks=*,-fuchsia* ../src/space.cpp
+
 
 * tools etc
 ** clang-format on only a block?
