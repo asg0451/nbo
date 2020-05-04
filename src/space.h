@@ -5,7 +5,6 @@
 #include "util.h"
 #include "vec2.h"
 
-#include <cmath>
 #include <iostream>
 #include <stdlib.h>
 #include <unordered_map>
@@ -16,8 +15,7 @@ class Space {
   double dt = 0.1; // sec
 
 public:
-  constexpr static const double G_real =
-      0.00000000006674; // 6.674 * std::pow(10, -11);
+  constexpr static const double G_real = 6.674 * 10e-11;
   Vec2<double> max;
   std::vector<Planet> planets;
   SpaceStats stats = SpaceStats{};
