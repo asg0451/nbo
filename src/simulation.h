@@ -10,7 +10,9 @@ class Simulation {
   SimulationStats stats = SimulationStats{};
 
 public:
-  Simulation(double dt, Space &space) : dt(dt), space(space) {}
+  // see comment in sim/ren thread about google's style re pointers and
+  // non-const refs
+  Simulation(double dt, Space *space) : dt(dt), space(*space) {}
   void tick();
 };
 

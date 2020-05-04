@@ -7,7 +7,7 @@
 #include <mutex>
 #include <thread>
 
-Threader::Action renderer_action(std::mutex *mx, const std::shared_ptr<Space>& space_p,
+Threader::Action renderer_action(std::mutex *mx, std::shared_ptr<Space> space_p,
                                  int sleep_millis) {
   return [&mx, space_p, sleep_millis](std::atomic<bool> &stop) {
     auto dim = util::get_terminal_dimensions();
@@ -27,7 +27,7 @@ Threader::Action renderer_action(std::mutex *mx, const std::shared_ptr<Space>& s
       }
       if (sleep_millis > 0) {
         std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
-}
+      }
     }
   };
 }

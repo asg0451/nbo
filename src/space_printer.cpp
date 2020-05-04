@@ -4,13 +4,14 @@
 #include <tuple>
 #include <unordered_map>
 
-// TODO(miles): overlay a grid and follow center of mass of the system / planet 0 ?
+// TODO(miles): overlay a grid and follow center of mass of the system / planet
+// 0 ?
 
 std::string SpacePrinter::cursor_move(int x, int y) {
   return util::string_format("%c[%d;%df", 0x1B, y, x);
 }
 
-std::string SpacePrinter::pretty_print_term(Space &space, int width,
+std::string SpacePrinter::pretty_print_term(const Space &space, int width,
                                             int height) {
 
   width = width - 2;
@@ -36,7 +37,8 @@ std::string SpacePrinter::pretty_print_term(Space &space, int width,
   return res;
 }
 
-std::string SpacePrinter::pretty_print(Space &space, int width, int height) {
+std::string SpacePrinter::pretty_print(const Space &space, int width,
+                                       int height) {
   double scale_x = 1.0 * width / space.max.x,
          scale_y = 1.0 * height / space.max.y;
 
@@ -65,7 +67,7 @@ std::string SpacePrinter::pretty_print(Space &space, int width, int height) {
     r += slots[i];
     if (i % width == width - 1) {
       r += "\n";
-}
+    }
   }
 
   return r;

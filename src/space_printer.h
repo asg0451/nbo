@@ -11,9 +11,9 @@ class SpacePrinter {
   static std::string cursor_move(int x, int y);
 
 public:
-  static std::string pretty_print(Space & /*space*/, int width = 100,
+  static std::string pretty_print(const Space &space, int width = 100,
                                   int height = 46);
-  static std::string pretty_print_term(Space & /*space*/, int width = 100,
+  static std::string pretty_print_term(const Space &space, int width = 100,
                                        int height = 46);
 
   // TODO(miles): should this be here at all?
@@ -28,6 +28,10 @@ public:
       std::cout << cursor_visible;
       std::cout.flush();
     }
+    HideCursor(const HideCursor &p) = delete;
+    HideCursor(HideCursor &&p) = delete;
+    HideCursor &operator=(const HideCursor &p) = delete;
+    HideCursor &operator=(HideCursor &&p) = delete;
   };
 
   class ClearScreen {
@@ -36,6 +40,10 @@ public:
       std::cout << std::endl << clear << std::endl;
       std::cout.flush();
     }
+    ClearScreen(const ClearScreen &p) = delete;
+    ClearScreen(ClearScreen &&p) = delete;
+    ClearScreen &operator=(const ClearScreen &p) = delete;
+    ClearScreen &operator=(ClearScreen &&p) = delete;
   };
 };
 

@@ -16,6 +16,10 @@ public:
       : loc(loc), vel(vel), mass(mass), id(next_id++){};
   Planet(const Planet &p) = default;
   Planet(Planet &&p) = default;
+  Planet &operator=(const Planet &p) = default;
+  Planet &operator=(Planet &&p) = default;
+
+  ~Planet() = default;
 
   bool operator==(const Planet &o) const { return id == o.id; }
 };
