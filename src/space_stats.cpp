@@ -1,7 +1,7 @@
 #include "simulation_stats.h"
 #include "util.h"
 
-#include <math.h>
+#include <cmath>
 
 void SimulationStats::log_speed(double speed) {
   if (speed > max_speed) {

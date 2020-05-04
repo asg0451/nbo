@@ -4,14 +4,14 @@
 #include "threader.h"
 
 #include <chrono>
+#include <cstdlib>
 #include <future>
 #include <iostream>
 #include <mutex>
-#include <stdlib.h>
 #include <thread>
 
 Threader::Action simulator_action(std::mutex *mx,
-                                  std::shared_ptr<Space> space_p,
+                                  const std::shared_ptr<Space>& space_p,
                                   int sleep_millis, double dt) {
   return [&mx, space_p, sleep_millis, dt](std::atomic<bool> &stop) {
     auto sim = Simulation{dt, *space_p.get()};
@@ -23,8 +23,9 @@ Threader::Action simulator_action(std::mutex *mx,
         auto lock = std::scoped_lock(*mx);
         sim.tick();
       }
-      if (sleep_millis > 0)
+      if (sleep_millis > 0) {
         std::this_thread::sleep_for(std::chrono::milliseconds(sleep_millis));
+}
     }
   };
 }

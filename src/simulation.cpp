@@ -15,8 +15,9 @@ void Simulation::tick() {
     stats.log_speed(p1.vel.mag());
 
     for (const auto &p2 : space.planets) {
-      if (p1 == p2)
+      if (p1 == p2) {
         continue;
+}
 
       auto distance = p2.loc.distance(p1.loc);
 

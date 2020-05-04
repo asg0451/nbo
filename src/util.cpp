@@ -13,7 +13,7 @@
 
 #include "vec2.h"
 
-// TODO: implementations are scattered between here and util.h to make it link.
+// TODO(miles): implementations are scattered between here and util.h to make it link.
 // idk why. figure out
 
 // print an unorderd map
@@ -30,7 +30,7 @@ std::ostream &operator<<(std::ostream &o, const std::unordered_map<K, V> &map) {
 
 namespace util {
 Vec2<int> get_terminal_dimensions() {
-  struct winsize size;
+  struct winsize size{};
   ioctl(STDOUT_FILENO, TIOCGWINSZ, &size);
   auto width = size.ws_col, height = size.ws_row;
   return Vec2<int>{width, height};

@@ -4,7 +4,7 @@
 #include <tuple>
 #include <unordered_map>
 
-// TODO: overlay a grid and follow center of mass of the system / planet 0 ?
+// TODO(miles): overlay a grid and follow center of mass of the system / planet 0 ?
 
 std::string SpacePrinter::cursor_move(int x, int y) {
   return util::string_format("%c[%d;%df", 0x1B, y, x);
@@ -63,8 +63,9 @@ std::string SpacePrinter::pretty_print(Space &space, int width, int height) {
   r += "|";
   for (std::size_t i = 0; i < slots.size(); i++) {
     r += slots[i];
-    if (i % width == width - 1)
+    if (i % width == width - 1) {
       r += "\n";
+}
   }
 
   return r;

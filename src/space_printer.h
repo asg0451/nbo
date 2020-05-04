@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_SPACE_PRINTER_H
+#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_SPACE_PRINTER_H
 
 #include "space.h"
 
@@ -10,11 +11,12 @@ class SpacePrinter {
   static std::string cursor_move(int x, int y);
 
 public:
-  static std::string pretty_print(Space &, int width = 100, int height = 46);
-  static std::string pretty_print_term(Space &, int width = 100,
+  static std::string pretty_print(Space & /*space*/, int width = 100,
+                                  int height = 46);
+  static std::string pretty_print_term(Space & /*space*/, int width = 100,
                                        int height = 46);
 
-  // TODO: should this be here at all?
+  // TODO(miles): should this be here at all?
 
   class HideCursor {
   public:
@@ -36,3 +38,5 @@ public:
     }
   };
 };
+
+#endif
