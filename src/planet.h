@@ -15,6 +15,7 @@ public:
   Planet(Vec2<double> loc, Vec2<double> vel, double mass)
       : loc(loc), vel(vel), mass(mass), id(next_id++){};
   Planet(const Planet &p) = default;
+  Planet(Planet &&p) = default;
 
   bool operator==(const Planet &o) const { return id == o.id; }
 };

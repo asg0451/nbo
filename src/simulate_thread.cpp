@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <thread>
 
-Threader::Action simulator_action(std::mutex &mx,
+Threader::Action simulator_action(std::mutex *mx,
                                   std::shared_ptr<Space> space_p,
                                   int sleep_millis, double dt) {
   return [&mx, space_p, sleep_millis, dt](std::atomic<bool> &stop) {
@@ -20,7 +20,7 @@ Threader::Action simulator_action(std::mutex &mx,
         return;
       }
       {
-        auto lock = std::scoped_lock(mx);
+        auto lock = std::scoped_lock(*mx);
         sim.tick();
       }
       if (sleep_millis > 0)
