@@ -33,10 +33,12 @@
 ** clang++ -g -fsantize=behavior (for debug build?)
 ** more??
 
+
 * notes
 ** override keyword
 ** virtual destructor
 ** "dont use delete as the instigator for the synchronized destruction of an object"
+
 
 * questions
 ** lock_guard vs unique_lock

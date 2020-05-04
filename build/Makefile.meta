@@ -21,3 +21,10 @@ msan:
 	cmake .. -DUSE_SANITIZER=memory && make
 lsan:
 	cmake .. -DUSE_SANITIZER=leak && make
+
+
+lint:
+	clang-tidy -header-filter=.* -checks=*,-fuchsia* ../src/*.cpp ../src/*.h
+
+lint-fix:
+	clang-tidy -header-filter=.* -checks=*,-fuchsia* -fix ../src/*.cpp ../src/*.h

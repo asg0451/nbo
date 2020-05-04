@@ -1,7 +1,6 @@
 #pragma once
 
 #include "space.h"
-#include "space_printer.h"
 #include "threader.h"
 
 #include <memory>

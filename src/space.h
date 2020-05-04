@@ -1,7 +1,6 @@
 #pragma once
 
 #include "planet.h"
-#include "space_stats.h"
 #include "util.h"
 #include "vec2.h"
 
@@ -11,27 +10,20 @@
 #include <vector>
 
 class Space {
-  double G = 1;    // for simplicity
-  double dt = 0.1; // sec
-
 public:
   // *10^-11 idk why this is like this but it works
   // TODO wtf. maybe an off by one order of magniture error somewhere else
   constexpr static const double G_real = 6.674 * 10e-12;
+
+  double G = G_real;
   Vec2<double> max;
   std::vector<Planet> planets;
-  SpaceStats stats = SpaceStats{};
 
   Space(Vec2<double> max, std::vector<Planet> planets)
       : max(max), planets(planets){};
 
-  Space(double dt, Vec2<double> max, std::vector<Planet> planets)
-      : dt(dt), max(max), planets(planets){};
-
-  Space(double G, double dt, Vec2<double> max, std::vector<Planet> planets)
-      : G(G), dt(dt), max(max), planets(planets){};
-
-  void tick();
+  Space(double G, Vec2<double> max, std::vector<Planet> planets)
+      : G(G), max(max), planets(planets){};
 
   static Space make_random_space(Vec2<double> max, int n);
 

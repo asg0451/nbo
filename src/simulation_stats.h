@@ -1,8 +1,10 @@
+#pragma once
+
 #include <cmath>
 #include <iostream>
 #include <string>
 
-class SpaceStats {
+class SimulationStats {
   double max_speed = 0;
   double min_distance = INFINITY;
   int ticks = 0;
