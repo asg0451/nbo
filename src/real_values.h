@@ -1,3 +1,6 @@
+#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_REAL_VALUES_H
+#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_REAL_VALUES_H
+
 #include <string>
 #include <vector>
 
@@ -30,3 +33,5 @@ const auto real_planets = std::vector<SolarBodyInfo>{
                   29.8 * nasa_speed_factor},
     SolarBodyInfo{"Mars", 0.642 * nasa_mass_factor, 227.9 * nasa_radius_factor,
                   24.1 * nasa_speed_factor}};
+
+#endif

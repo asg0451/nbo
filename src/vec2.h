@@ -1,12 +1,15 @@
+#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_VEC2_H
+#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_VEC2_H
+
 #pragma once
 
 #include <cmath>
 #include <iostream>
 
-// TODO: how to use type traits to make this only work for primitives.
+// TODO(miles): how to use type traits to make this only work for primitives.
 // is_arithemetic, <type_traits>
 
-// TODO: move out impl
+// TODO(miles): move out impl
 
 template <typename T> class Vec2 {
 public:
@@ -77,3 +80,5 @@ template <typename T>
 std::ostream &operator<<(std::ostream &o, const Vec2<T> &v) {
   return o << "Vec2{" << v.x << ", " << v.y << "}";
 }
+
+#endif

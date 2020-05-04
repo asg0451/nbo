@@ -1,3 +1,6 @@
+#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_UTIL_H
+#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_UTIL_H
+
 #pragma once
 
 #include <array>
@@ -31,8 +34,9 @@ namespace util {
 template <typename K, typename V>
 std::optional<V> find_optional(const std::unordered_map<K, V> &map, K k) {
   auto t = map.find(k);
-  if (t == map.end())
+  if (t == map.end()) {
     return std::nullopt;
+}
   // return std::optional<std::reference_wrapper<V>>{t->second};
   return std::optional{t->second};
 }
@@ -52,3 +56,5 @@ std::string string_format(const std::string &format, Args... args) {
 
 Vec2<int> get_terminal_dimensions();
 } // namespace util
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_THREADER_H
+#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_THREADER_H
+
 #pragma once
 
 #include <functional>
@@ -9,7 +12,7 @@
 
 class Threader final {
 public:
-  typedef std::function<void(std::atomic<bool> &)> Action;
+  using Action = std::function<void (std::atomic<bool> &)>;
 
 private:
   std::atomic<bool> stop;
@@ -18,6 +21,8 @@ private:
 
 public:
   void run();
-  Threader(Action action);
+  explicit Threader(Action action);
   ~Threader();
 };
+
+#endif

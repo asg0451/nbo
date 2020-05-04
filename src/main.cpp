@@ -21,11 +21,11 @@
 
 std::atomic<bool> quit(false); // signal flag
 
-void pls_quit(int) { quit.store(true); }
+void pls_quit(int /*unused*/) { quit.store(true); }
 
 int main() {
   std::signal(SIGINT, pls_quit);
-  srand(time(NULL));
+  srand(time(nullptr));
 
   auto solar_system_dimensions =
       Vec2<double>{1000 * nasa_radius_factor, 500 * nasa_radius_factor};
