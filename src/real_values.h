@@ -1,10 +1,9 @@
-#include <cmath>
 #include <string>
 #include <vector>
 
-double v_orbit(double G, double mass_c, double r) {
-  return std::sqrt(G * mass_c / r);
-}
+// double v_orbit(double G, double mass_c, double r) {
+//   return std::sqrt(G * mass_c / r);
+// }
 
 // from nasa fact sheet
 // https://nssdc.gsfc.nasa.gov/planetary/factsheet/
@@ -17,11 +16,11 @@ public:
   double mass, orbit_radius, orbit_speed;
 };
 
-const double nasa_mass_factor = std::pow(10, 24);
-const double nasa_radius_factor = 106 * 1000000;
-const double nasa_speed_factor = 1000;
+constexpr double nasa_mass_factor = 10e24;    // kg
+constexpr double nasa_radius_factor = 10e9;   // 10^6 km
+constexpr double nasa_speed_factor = 1000;    // km/s
+constexpr double mass_of_sun = 1.989 * 10e30; // kg
 
-const double mass_of_sun = 1.989 * std::pow(10, 30);
 const auto real_planets = std::vector<SolarBodyInfo>{
     SolarBodyInfo{"Mercury", 0.33 * nasa_mass_factor, 57.9 * nasa_radius_factor,
                   47.4 * nasa_speed_factor},

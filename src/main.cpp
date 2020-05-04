@@ -57,20 +57,19 @@ int main() {
                    auto vel = Vec2<double>{0, p.orbit_speed};
                    return Planet{loc, vel, p.mass};
                  });
-  auto solar_system =
-      Space{Space::G_real, 0.1, solar_system_dimensions, planets};
+  auto solar_system = Space{Space::G_real, 1, solar_system_dimensions, planets};
 
-  // auto space_p = std::make_shared<Space>(solar_system);
+  auto space_p = std::make_shared<Space>(solar_system);
 
-  auto space_p = std::make_shared<Space>(
-      Space{0.00001,
-            {200, 100},
-            std::vector<Planet>{
-                Planet{{50, 60}, {0, 0}, 20}, Planet{{60, 60}, {1, -1}, 10},
-                Planet{{40, 20}, {0, .7}, 10}, Planet{{45, 25}, {.2, 0}, 10},
-                // Planet{{20, 20}, {0, 0}, 10000000000}, // why doesnt this
-                // suck everything in?
-            }});
+  // auto space_p = std::make_shared<Space>(
+  //     Space{0.00001,
+  //           {200, 100},
+  //           std::vector<Planet>{
+  //               Planet{{50, 60}, {0, 0}, 20}, Planet{{60, 60}, {1, -1}, 10},
+  //               Planet{{40, 20}, {0, .7}, 10}, Planet{{45, 25}, {.2, 0}, 10},
+  //               // Planet{{20, 20}, {0, 0}, 10000000000}, // why doesnt this
+  //               // suck everything in?
+  //           }});
 
   // auto space_p =
   //     std::make_shared<Space>(Space::make_random_space({200, 100}, 10));

@@ -16,6 +16,8 @@
 ** TODO planet velocity indicators?
 ** TODO real graphics
 ** TODO 3d
+** TODO asserts
+** TODO move simulation, dt out of space. is space even a good abstraction? probably not
 
 * tools etc
 ** clang-format on only a block?
