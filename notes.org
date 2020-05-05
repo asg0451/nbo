@@ -20,6 +20,7 @@
 ** TODO move simulation, dt out of space. is space even a good abstraction? probably not
 ** TODO use clang-tidy (apt install clang-tidy)
    - clang-tidy -header-filter=.* -checks=*,-fuchsia* ../src/space.cpp
+** TODO testing -- what tools? are things well factored for testing?
 
 
 * tools etc

@@ -14,22 +14,19 @@ std::string SpacePrinter::cursor_move(int x, int y) {
 std::string SpacePrinter::pretty_print_term(const Space &space, int width,
                                             int height) {
 
-  width = width - 2;
-  height = height - 2;
-
   double scale_x = 1.0 * width / space.max.x,
          scale_y = 1.0 * height / space.max.y;
 
   auto res = std::string{};
   res.reserve((space.planets.size() + 3) * 7);
 
-  res += clear + cursor_move(0, 0);
+  res += cursor_move(0, 0);
 
   for (auto p : space.planets) {
     int x = std::floor(p.loc.x * scale_x);
     int y = std::floor(p.loc.y * scale_y);
 
-    if (x > 0 && x < width && 7 > 0 && y < height) {
+    if (x > 0 && x < width && y > 0 && y < height) {
       auto icon = std::to_string(p.id);
       res += cursor_move(x, y) + icon;
     }
@@ -71,4 +68,34 @@ std::string SpacePrinter::pretty_print(const Space &space, int width,
   }
 
   return r;
+}
+
+std::string SpacePrinter::pretty_print_with_breadcrumbs(const Space &space,
+                                                        int width, int height) {
+  // add planets to breadcrumbs
+  for (auto p : space.planets) {
+    breadcrumbs.add(p.loc);
+  }
+
+  double scale_x = 1.0 * width / space.max.x,
+         scale_y = 1.0 * height / space.max.y;
+
+  // get the basic render
+  auto res = SpacePrinter::pretty_print_term(space, width, height);
+
+  auto crumbs_res = cursor_move(0, 0);
+  crumbs_res.reserve(breadcrumbs.max * 7);
+
+  // add the crumbs
+  breadcrumbs.for_each(
+      [width, height, scale_x, scale_y, &crumbs_res](Vec2<double> crumb) {
+        int x = std::floor(crumb.x * scale_x);
+        int y = std::floor(crumb.y * scale_y);
+
+        if (x > 0 && x < width && y > 0 && y < height) {
+          crumbs_res += cursor_move(x, y) + ".";
+        }
+      });
+
+  return crumbs_res + res;
 }

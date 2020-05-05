@@ -31,6 +31,9 @@ const auto real_planets = std::vector<SolarBodyInfo>{
                   35 * nasa_speed_factor},
     SolarBodyInfo{"Earth", 5.97 * nasa_mass_factor, 149.6 * nasa_radius_factor,
                   29.8 * nasa_speed_factor},
+    SolarBodyInfo{"Moon", 0.073 * nasa_mass_factor,
+                  (149.6 + .384) * nasa_radius_factor,
+                  (29.8 + 1) * nasa_speed_factor},
     SolarBodyInfo{"Mars", 0.642 * nasa_mass_factor, 227.9 * nasa_radius_factor,
                   24.1 * nasa_speed_factor}};
 

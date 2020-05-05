@@ -15,14 +15,16 @@ Threader::Action renderer_action(std::mutex &mx, std::shared_ptr<Space> space_p,
     auto hc = SpacePrinter::HideCursor{};
     auto cs = SpacePrinter::ClearScreen{};
 
+    auto sp = SpacePrinter{10000};
+
     for (;;) {
       if (stop) {
         return;
       }
       {
         auto lock = std::scoped_lock(mx);
-        std::cout << SpacePrinter::pretty_print_term(*space_p.get(), dim.x,
-                                                     dim.y);
+        std::cout << sp.clear + sp.pretty_print_with_breadcrumbs(*space_p.get(),
+                                                                 dim.x, dim.y);
         std::cout.flush();
       }
       if (sleep_millis > 0) {

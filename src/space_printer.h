@@ -1,20 +1,33 @@
 #ifndef NBO_SPACE_PRINTER_H
 #define NBO_SPACE_PRINTER_H
 
+#include "ring_buffer.h"
 #include "space.h"
+#include "vec2.h"
 
 class SpacePrinter {
   inline static std::string cursor_visible = "\x1B[?25h";
   inline static std::string cursor_invisible = "\x1B[?25l";
-  inline static std::string clear = "\33[2J";
 
   static std::string cursor_move(int x, int y);
 
+  RingBuffer<Vec2<double>> breadcrumbs;
+
 public:
+  // TODO moved this to public so i could use it elsewhere. this means it doesnt
+  // belong here
+  inline static std::string clear = "\33[2J";
+
   static std::string pretty_print(const Space &space, int width = 100,
                                   int height = 46);
   static std::string pretty_print_term(const Space &space, int width = 100,
                                        int height = 46);
+
+  std::string pretty_print_with_breadcrumbs(const Space &space, int width = 100,
+                                            int height = 46);
+
+  SpacePrinter(int num_breadcrumbs)
+      : breadcrumbs(RingBuffer<Vec2<double>>{num_breadcrumbs}) {}
 
   // TODO(miles): should this be here at all?
 
