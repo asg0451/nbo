@@ -7,12 +7,14 @@
 class Simulation {
   double dt = 0.1; // sec
   Space &space;
-  SimulationStats stats = SimulationStats{};
 
 public:
+  SimulationStats stats = SimulationStats{};
   // see comment in sim/ren thread about google's style re pointers and
   // non-const refs
   Simulation(double dt, Space *space) : dt(dt), space(*space) {}
+  Simulation(double dt, Space *space, SimulationStats stats)
+      : dt(dt), space(*space), stats(stats) {}
   void tick();
 };
 

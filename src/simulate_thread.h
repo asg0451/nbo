@@ -13,6 +13,7 @@
 
 // see comment in render_thread.h
 Threader::Action simulator_action(std::mutex &, const std::shared_ptr<Space>,
-                                  int sleep_millis, double dt);
+                                  int sleep_millis, double dt,
+                                  bool disable_stats = false);
 
 #endif

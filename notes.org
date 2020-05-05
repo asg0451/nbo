@@ -21,8 +21,8 @@
 ** TODO use clang-tidy (apt install clang-tidy)
    - clang-tidy -header-filter=.* -checks=*,-fuchsia* ../src/space.cpp
 ** TODO testing -- what tools? are things well factored for testing?
-
-
+** TODO better planet init system -- ez for users ie me
+** TODO REFACTOR sim stats. i want to display them in render threat, i want it to have access to dt, or at least something that prints it should, so it can calc sim time to real time ratio (sim time per tick (dt) / real sec per tick (last_duration_micro) )
 * tools etc
 ** clang-format on only a block?
 ** clang-modernize
@@ -39,7 +39,11 @@
 ** override keyword
 ** virtual destructor
 ** "dont use delete as the instigator for the synchronized destruction of an object"
-
+** perf
+   - sudo bash -c 'echo 0 > /proc/sys/kernel/kptr_restrict'
+   - sudo bash -c 'echo -1 > /proc/sys/kernel/perf_event_paranoid '
+   - make && perf record -g --call-graph dwarf ./bin/nbo
+   - perf analyze
 
 * questions
 ** lock_guard vs unique_lock
@@ -59,3 +63,13 @@
     add it to src/CMakeLists.txt, then rerun cmake
 *** run cmake
     from build/: cmake -DCMAKE_CXX_COMPILER=clang++ ..
+
+* add to dotfile installs
+  - clang
+  - clang-tidy
+  - clang-tools
+  - bear
+  - cmake
+  - linux-tools-common
+  - linux-tools-generic
+  - linux-tools-generic

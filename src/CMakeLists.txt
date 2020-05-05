@@ -4,7 +4,7 @@
 
 link_directories(${nbo_SOURCE_DIR}/src)
 # unfortunately it seems like you do have to add each file to here
-add_executable(nbo main.cpp planet.cpp render_thread.cpp simulate_thread.cpp space.cpp space_printer.cpp util.cpp threader.cpp space_stats.cpp simulation.cpp)
+add_executable(nbo main.cpp planet.cpp render_thread.cpp simulate_thread.cpp space.cpp space_printer.cpp util.cpp threader.cpp simulation_stats.cpp simulation.cpp)
 
 # pthread
 set(THREADS_PREFER_PTHREAD_FLAG ON)

@@ -1,5 +1,6 @@
 #include "simulate_thread.h"
 #include "simulation.h"
+#include "simulation_stats.h"
 #include "space_printer.h"
 #include "threader.h"
 
@@ -12,11 +13,18 @@
 
 Threader::Action simulator_action(std::mutex &mx,
                                   const std::shared_ptr<Space> space_p,
-                                  int sleep_millis, double dt) {
-  return [&mx, space_p, sleep_millis, dt](std::atomic<bool> &stop) {
-    auto sim = Simulation{dt, space_p.get()};
+                                  int sleep_millis, double dt,
+                                  bool disable_stats) {
+  return [&mx, space_p, sleep_millis, dt,
+          disable_stats](std::atomic<bool> &stop) {
+    auto sim = disable_stats
+                   ? Simulation{dt, space_p.get(), NopSimulationStats{}}
+                   : Simulation{dt, space_p.get()};
+
     for (;;) {
       if (stop) {
+        sim.stats.dump(std::cout);
+
         return;
       }
       {
