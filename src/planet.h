@@ -1,5 +1,5 @@
-#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_PLANET_H
-#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_PLANET_H
+#ifndef NBO_PLANET_H
+#define NBO_PLANET_H
 
 #include "vec2.h"
 #include <iostream>

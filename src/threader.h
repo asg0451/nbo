@@ -1,5 +1,5 @@
-#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_THREADER_H
-#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_THREADER_H
+#ifndef NBO_THREADER_H
+#define NBO_THREADER_H
 
 #pragma once
 

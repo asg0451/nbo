@@ -1,5 +1,5 @@
-#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_REAL_VALUES_H
-#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_REAL_VALUES_H
+#ifndef NBO_REAL_VALUES_H
+#define NBO_REAL_VALUES_H
 
 #include <string>
 #include <vector>

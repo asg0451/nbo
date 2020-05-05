@@ -7,6 +7,8 @@ debug:
 	cmake -DCMAKE_BUILD_TYPE=Debug .. && make
 release:
 	cmake -DCMAKE_BUILD_TYPE=Release .. && make
+debrel:
+	cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo .. && make
 # Possible values are empty, Debug, Release, RelWithDebInfo and MinSizeRel
 
 allsan: tsan asan usan msan lsan normal

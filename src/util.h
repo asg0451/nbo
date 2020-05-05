@@ -1,5 +1,5 @@
-#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_UTIL_H
-#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_UTIL_H
+#ifndef NBO_UTIL_H
+#define NBO_UTIL_H
 
 #pragma once
 

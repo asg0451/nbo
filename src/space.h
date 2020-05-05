@@ -1,5 +1,5 @@
-#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_SPACE_H
-#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_SPACE_H
+#ifndef NBO_SPACE_H
+#define NBO_SPACE_H
 
 #include "planet.h"
 #include "util.h"

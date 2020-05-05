@@ -1,5 +1,5 @@
-#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_RENDER_THREAD_H
-#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_RENDER_THREAD_H
+#ifndef NBO_RENDER_THREAD_H
+#define NBO_RENDER_THREAD_H
 
 #include "space.h"
 #include "threader.h"

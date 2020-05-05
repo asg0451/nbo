@@ -1,5 +1,5 @@
-#ifndef _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_SIMULATION_STATS_H
-#define _HOME_MILES_PROJ_NBO_BUILD_SRC_______SRC_SIMULATION_STATS_H
+#ifndef NBO_SIMULATION_STATS_H
+#define NBO_SIMULATION_STATS_H
 
 #include <cmath>
 #include <iostream>
