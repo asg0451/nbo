@@ -1,4 +1,6 @@
 #include "simulation.h"
+#include "algorithm"
+#include "iterator"
 
 // naive & shitty, n^2 in space & time
 void Simulation::tick() {
@@ -8,8 +10,8 @@ void Simulation::tick() {
   }
 
   // build acceleration map
-  auto accels = std::unordered_map<int, Vec2<double>>{};
-  accels.reserve(std::pow(space.planets.size(), 2));
+  // small so use array
+  auto accels = std::make_unique<Vec2<double>[]>(space.planets.size());
 
   for (const auto &p1 : space.planets) {
     stats.log_speed(p1.vel.mag());
@@ -29,18 +31,14 @@ void Simulation::tick() {
       auto fv = (p2.loc - p1.loc).unit() * f_s;
       // f/m=a
       // add to accel for p1
-      // are these refs or values? assuming former
-      auto cur_a =
-          util::find_optional(accels, p1.id).value_or(Vec2<double>::zero());
+      auto cur_a = accels[p1.id];
       cur_a = cur_a + fv / p1.mass;
-      accels.insert({p1.id, cur_a});
+      accels[p1.id] = cur_a;
     }
   }
 
-  // apply all accel updates
   for (auto &p : space.planets) {
-    auto a = accels[p.id];
-    p.vel += a * dt;
+    p.vel += accels[p.id] * dt;
   }
 
   stats.log_tick();

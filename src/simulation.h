@@ -1,6 +1,8 @@
 #ifndef NBO_SIMULATION_H
 #define NBO_SIMULATION_H
 
+#include <utility>
+
 #include "simulation_stats.h"
 #include "space.h"
 
@@ -14,7 +16,7 @@ public:
   // non-const refs
   Simulation(double dt, Space *space) : dt(dt), space(*space) {}
   Simulation(double dt, Space *space, SimulationStats stats)
-      : dt(dt), space(*space), stats(stats) {}
+      : dt(dt), space(*space), stats(std::move(stats)) {}
   void tick();
 };
 

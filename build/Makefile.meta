@@ -26,7 +26,7 @@ lsan:
 
 
 lint:
-	clang-tidy -header-filter=.* -checks=*,-fuchsia* ../src/*.cpp ../src/*.h
+	clang-tidy -header-filter=.* -checks=*,-fuchsia*,-llvm-header-guard ../src/*.cpp ../src/*.h
 
 lint-fix:
-	clang-tidy -header-filter=.* -checks=*,-fuchsia* -fix ../src/*.cpp ../src/*.h
+	clang-tidy -header-filter=.* -checks=*,-fuchsia*,-llvm-header-guard -fix-errors ../src/*.cpp ../src/*.h

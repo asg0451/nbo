@@ -49,7 +49,7 @@
    - sudo bash -c 'echo 0 > /proc/sys/kernel/kptr_restrict'
    - sudo bash -c 'echo -1 > /proc/sys/kernel/perf_event_paranoid '
    - make && perf record -g --call-graph dwarf ./bin/nbo
-   - perf analyze
+   - perf report
 ** std::copy (implement as friend for stl algs?), std::exchange. copy-and-swap for assignment op overloads (then need to write a swap)
 *** TODO copy from slide @ https://youtu.be/7Qgd9B1KuMQ?t=2482 (also operator= should be noexcept and there should be one by ref, one by rvalue ref instead of his copy= idiom)
 ** rule of 3/5/4.5, rule of 0
