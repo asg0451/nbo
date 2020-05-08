@@ -4,15 +4,14 @@
 ** DONE end threads via a (shared?) future
 ** TODO parallelize simulation per tick?
 ** TODO optimize simulation generally
-** TODO move simulation out of space
+** DONE move simulation out of space
 ** TODO google build / deps system
 ** TODO leverage tl lib - tl::optional, .map, .and_then
 ** TODO thread exception handling
    - https://stackoverflow.com/questions/233127/how-can-i-propagate-exceptions-between-threads
 ** TODO thingy to get sim accuracy
    - run the simulation over & over at different time steps and look at eg 5-6 seconds and compare positions. narrow in on a ts that gives <N% variance or something
-** TODO report ticks / sec (perf) and using dt give a real-world time
-** TODO planet path breadcrumbs
+** DONE planet path breadcrumbs
 ** TODO planet velocity indicators?
 ** TODO real graphics
 ** TODO 3d
@@ -23,6 +22,13 @@
 ** TODO testing -- what tools? are things well factored for testing?
 ** TODO better planet init system -- ez for users ie me
 ** TODO REFACTOR sim stats. i want to display them in render threat, i want it to have access to dt, or at least something that prints it should, so it can calc sim time to real time ratio (sim time per tick (dt) / real sec per tick (last_duration_micro) )
+** TODO write states to a file. exception handling
+** TODO make vec2 constructor able to take an initializer list (i think it already can but why)
+** Tooling
+*** TODO yasnippit type thing for inserting rule of 5 special function declarations or smthn
+*** TODO all member vars get underscore at end
+
+
 * tools etc
 ** clang-format on only a block?
 ** clang-modernize
@@ -44,6 +50,19 @@
    - sudo bash -c 'echo -1 > /proc/sys/kernel/perf_event_paranoid '
    - make && perf record -g --call-graph dwarf ./bin/nbo
    - perf analyze
+** std::copy (implement as friend for stl algs?), std::exchange. copy-and-swap for assignment op overloads (then need to write a swap)
+*** TODO copy from slide @ https://youtu.be/7Qgd9B1KuMQ?t=2482 (also operator= should be noexcept and there should be one by ref, one by rvalue ref instead of his copy= idiom)
+** rule of 3/5/4.5, rule of 0
+** decltype(thing) useful for lambdas
+** RVO
+*** dont std::move in return
+*** move is usually a fallback
+*** has to be decidable at construction time (?)
+*** prvalues (temp) or stack objects only. fn parameters dont get it (you have to construct it yourself)
+*** if ternary -- both cases have to be rvalues?
+*** map.emplace(k, v)
+
+
 
 * questions
 ** lock_guard vs unique_lock
