@@ -1,8 +1,6 @@
 #ifndef NBO_VEC2_H
 #define NBO_VEC2_H
 
-#pragma once
-
 #include <cmath>
 #include <iostream>
 

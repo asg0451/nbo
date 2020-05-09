@@ -1,8 +1,6 @@
 #ifndef NBO_UTIL_H
 #define NBO_UTIL_H
 
-#pragma once
-
 #include <array>
 #include <cstdio>
 #include <iostream>
@@ -36,7 +34,7 @@ std::optional<V> find_optional(const std::unordered_map<K, V> &map, K k) {
   auto t = map.find(k);
   if (t == map.end()) {
     return std::nullopt;
-}
+  }
   // return std::optional<std::reference_wrapper<V>>{t->second};
   return std::optional{t->second};
 }

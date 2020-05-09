@@ -1,8 +1,6 @@
 #ifndef NBO_SIMULATE_THREAD_H
 #define NBO_SIMULATE_THREAD_H
 
-#pragma once
-
 #include "space.h"
 #include "threader.h"
 

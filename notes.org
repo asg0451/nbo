@@ -27,6 +27,8 @@
 ** Tooling
 *** TODO yasnippit type thing for inserting rule of 5 special function declarations or smthn
 *** TODO all member vars get underscore at end
+*** DONE optimize sim a bit
+*** DONE refactor threader to be templated
 
 
 * tools etc

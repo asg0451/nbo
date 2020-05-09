@@ -1,8 +1,6 @@
 #ifndef NBO_THREADER_H
 #define NBO_THREADER_H
 
-#pragma once
-
 #include <functional>
 #include <future>
 #include <iostream>
