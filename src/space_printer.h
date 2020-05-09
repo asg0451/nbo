@@ -14,7 +14,7 @@ class SpacePrinter {
   RingBuffer<Vec2<double>> breadcrumbs;
 
 public:
-  // TODO moved this to public so i could use it elsewhere. this means it doesnt
+  // TODO(miles): moved this to public so i could use it elsewhere. this means it doesnt
   // belong here
   inline static std::string clear = "\33[2J";
 
@@ -26,7 +26,7 @@ public:
   std::string pretty_print_with_breadcrumbs(const Space &space, int width = 100,
                                             int height = 46);
 
-  SpacePrinter(int num_breadcrumbs)
+  explicit SpacePrinter(int num_breadcrumbs)
       : breadcrumbs(RingBuffer<Vec2<double>>{num_breadcrumbs}) {}
 
   // TODO(miles): should this be here at all?

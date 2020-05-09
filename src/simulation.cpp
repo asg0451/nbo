@@ -14,7 +14,7 @@ void Simulation::tick() {
   auto accels = std::make_unique<Vec2<double>[]>(space.planets.size());
 
   for (const auto &p1 : space.planets) {
-    stats.log_speed(p1.vel.mag());
+    stats->log_speed(p1.vel.mag());
 
     for (const auto &p2 : space.planets) {
       if (p1 == p2) {
@@ -23,7 +23,7 @@ void Simulation::tick() {
 
       auto distance = p2.loc.distance(p1.loc);
 
-      stats.log_distance(distance);
+      stats->log_distance(distance);
 
       // newton
       auto f_s = space.G * p1.mass * p2.mass / std::pow(distance, 2);
@@ -41,5 +41,5 @@ void Simulation::tick() {
     p.vel += accels[p.id] * dt;
   }
 
-  stats.log_tick();
+  stats->log_tick();
 }

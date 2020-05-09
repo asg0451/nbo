@@ -10,15 +10,17 @@ private:
   int idx = 0;
 
 public:
-  RingBuffer(int max) : max(max), vec(std::vector<E>{}) { vec.reserve(max); };
-  RingBuffer(const std::vector<E> &v) : max(v.size()), vec(vec){};
-  RingBuffer(std::vector<E> &&v) : max(v.size()), vec(vec){};
+  explicit RingBuffer(int max) : max(max), vec(std::vector<E>{}) {
+    vec.reserve(max);
+  };
+  explicit RingBuffer(const std::vector<E> &v) : max(v.size()), vec(vec){};
+  explicit RingBuffer(std::vector<E> &&v) noexcept : max(v.size()), vec(vec){};
   RingBuffer(const RingBuffer &r) = default;
-  RingBuffer(RingBuffer &&r) = default;
+  RingBuffer(RingBuffer &&r) noexcept = default;
 
   ~RingBuffer() = default;
   RingBuffer &operator=(const RingBuffer &b) = default;
-  RingBuffer &operator=(RingBuffer &&b) = default;
+  RingBuffer &operator=(RingBuffer &&b) noexcept = default;
 
   // add element. overwrites
   void add(E el) {
@@ -31,11 +33,11 @@ public:
     }
   }
 
-  // TODO: iterators. seems like a whole thing
+  // TODO(miles): iterators. seems like a whole thing
   // https://www.justsoftwaresolutions.co.uk/cplusplus/generating_sequences.html
 
-  // TODO: move to .cpp
-  // TODO: type traits is callable?
+  // TODO(miles): move to .cpp
+  // TODO(miles): type traits is callable?
   template <typename F> void for_each(F f) {
     // from idx + 1 -> idx, wraping back around
     // idx = 0, max = 100

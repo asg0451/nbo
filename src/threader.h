@@ -10,21 +10,33 @@
 #include <mutex>
 #include <thread>
 
-class Threader final {
+template <typename Fer> class Threader final {
 public:
-  using Action = std::function<void(std::atomic<bool> &)>;
-
 private:
+  Fer fer;
   std::atomic<bool> stop;
-  Action action;
   std::thread th;
 
 public:
-  void run();
-  explicit Threader(Action action);
-  ~Threader();
+  void run() {
+    std::cout << "th run" << std::endl;
+    fer.run(stop);
+  };
 
-  // what is this? dont allow these to happen?
+  // use `explicit` constructor if it has one argument to prevent accidental
+  // implicit conversions
+  explicit Threader(Fer fer)
+      : fer(std::move(fer)), stop(false),
+        th(std::thread(&Threader::run, this)){};
+
+  ~Threader() {
+    stop = true;
+    if (th.joinable()) {
+      th.join();
+    }
+  }
+
+  // disallow all these
   Threader(const Threader &p) = delete;
   Threader(Threader &&p) = delete;
   Threader &operator=(const Threader &p) = delete;
@@ -32,7 +44,3 @@ public:
 };
 
 #endif
-// ../../src/threader.h:13:7: warning: class 'Threader' defines a non-default
-// destructor but does not define a copy constructor, a copy assignment
-// operator, a move constructor or a move assignment operator
-// [hicpp-special-member-functions]

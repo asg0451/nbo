@@ -10,10 +10,21 @@
 #include <memory>
 #include <mutex>
 #include <thread>
+#include <utility>
 
-// see comment in render_thread.h
-Threader::Action simulator_action(std::mutex &, const std::shared_ptr<Space>,
-                                  int sleep_millis, double dt,
-                                  bool disable_stats = false);
+class SimulateThread {
+  std::mutex &mx;
+  std::shared_ptr<Space> space_p;
+  int sleep_millis;
+  double dt;
+  bool disable_stats = false;
+
+public:
+  SimulateThread(std::mutex &mx, std::shared_ptr<Space> space_p,
+                 int sleep_millis, double dt, bool disable_stats = false)
+      : mx(mx), space_p(std::move(space_p)), sleep_millis(sleep_millis), dt(dt),
+        disable_stats(disable_stats){};
+  void run(std::atomic<bool> & /*stop*/);
+};
 
 #endif

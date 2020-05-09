@@ -2,17 +2,16 @@
 
 #include <utility>
 
-void Threader::run() {
-  std::cout << "th run" << std::endl;
-  action(stop);
-}
+// TODO rm file or move things back
 
-Threader::Threader(Threader::Action action)
-    : stop(false), action(std::move(action)),
-      th(std::thread(&Threader::run, this)){};
-Threader::~Threader() {
-  stop = true;
-  if (th.joinable()) {
-    th.join();
-  }
-}
+// template <typename Fer> void Threader<Fer>::run() {
+//   std::cout << "th run" << std::endl;
+//   fer.run(stop);
+// }
+
+// template <typename Fer> Threader<Fer>::~Threader() {
+//   stop = true;
+//   if (th.joinable()) {
+//     th.join();
+//   }
+// }

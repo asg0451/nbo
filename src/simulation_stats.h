@@ -21,6 +21,8 @@ public:
   virtual void log_speed(double /*speed*/);
   virtual void log_distance(double /*distance*/);
   virtual void log_tick();
+  // virtual functions -> virt destructor required
+  virtual ~SimulationStats() = default;
 
   std::string print() const;
   std::ostream &dump(std::ostream &o) const;
@@ -33,7 +35,7 @@ public:
   void log_tick() override {}
 
   std::string print() const { return "stats disabled"; };
-  std::ostream &dump(std::ostream &o) const { return o; };
+  std::ostream &dump(std::ostream &o) const { return o << print(); };
 };
 
 #endif

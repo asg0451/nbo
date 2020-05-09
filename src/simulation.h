@@ -11,11 +11,11 @@ class Simulation {
   Space &space;
 
 public:
-  SimulationStats stats = SimulationStats{};
+  std::unique_ptr<SimulationStats> stats = std::make_unique<SimulationStats>();
   // see comment in sim/ren thread about google's style re pointers and
   // non-const refs
   Simulation(double dt, Space *space) : dt(dt), space(*space) {}
-  Simulation(double dt, Space *space, SimulationStats stats)
+  Simulation(double dt, Space *space, std::unique_ptr<SimulationStats> stats)
       : dt(dt), space(*space), stats(std::move(stats)) {}
   void tick();
 };

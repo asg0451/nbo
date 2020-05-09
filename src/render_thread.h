@@ -7,10 +7,17 @@
 #include <memory>
 #include <mutex>
 
-// mutex is a ptr rather than a ref because google style says all refs should be
-// const and it cant be const since we're locking it
-// NOTE: undid that cause it made a segfault...
-Threader::Action renderer_action(std::mutex &, const std::shared_ptr<Space>,
-                                 int);
+// TODO: should this & SimulateThread be subclasses of something? unnecessary
+// for now
+class RenderThread {
+  std::mutex &mx;
+  std::shared_ptr<Space> space_p;
+  int sleep_millis;
+
+public:
+  RenderThread(std::mutex &mx, std::shared_ptr<Space> space_p, int sleep_millis)
+      : mx(mx), space_p(std::move(space_p)), sleep_millis(sleep_millis){};
+  void run(std::atomic<bool> &);
+};
 
 #endif
