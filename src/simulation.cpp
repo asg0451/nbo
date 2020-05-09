@@ -1,6 +1,7 @@
 #include "simulation.h"
-#include "algorithm"
-#include "iterator"
+
+#include <algorithm>
+#include <iterator>
 
 // naive & shitty, n^2 in space & time
 void Simulation::tick() {

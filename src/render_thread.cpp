@@ -1,7 +1,6 @@
 #include "render_thread.h"
 #include "simulation.h"
 #include "space_printer.h"
-#include "threader.h"
 
 #include <memory>
 #include <mutex>

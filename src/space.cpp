@@ -1,6 +1,4 @@
 #include "space.h"
-#include "util.h"
-
 #include <random>
 
 Space Space::make_random_space(Vec2<double> max, int n) {

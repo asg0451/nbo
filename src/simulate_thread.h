@@ -2,7 +2,6 @@
 #define NBO_SIMULATE_THREAD_H
 
 #include "space.h"
-#include "threader.h"
 
 #include <future>
 #include <memory>

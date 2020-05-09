@@ -45,7 +45,7 @@ int main() {
     auto mx = std::mutex{};
     auto renderer = Threader<RenderThread>{RenderThread{mx, space_p, 100}};
     auto simulator =
-        Threader<SimulateThread>{SimulateThread{mx, space_p, 0, 1}};
+        Threader<SimulateThread>{SimulateThread{mx, space_p, 0, 5}};
 
     for (;;) {
       std::this_thread::sleep_for(std::chrono::milliseconds(100));
